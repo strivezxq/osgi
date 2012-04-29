@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+  	<groupId>com.xiu.open.platform</groupId>
+  	<artifactId>xop-platform</artifactId>
+  	<version>2.5.0</version>
+  </parent>
+         
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>xop-platform-api</artifactId>
+  <version>${project.parent.version}</version>
+  <packaging>bundle</packaging>
+  <name>xop-platform-api</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <dependencies>
+	   <dependency>
+	   		<groupId>com.xiu.open.platform</groupId>
+	   		 <artifactId>xop-platform-common</artifactId>
+	  		<version>${project.parent.version}</version>
+	   </dependency>
+  	 <dependency>
+	      <groupId>com.xiu.open.platform</groupId>
+	      <artifactId>xop-platform-domain</artifactId>
+	      <version>${parent.version}</version>
+    </dependency>
+  </dependencies>
+
+  <!-- for packaging as an OSGi bundle, we use the maven-bundle-plugin -->
+  
+  <!-- see http://felix.apache.org/site/maven-bundle-plugin-bnd.html for more info -->
+  <build>
+    <resources>
+      <!-- standard Maven folder -->
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <!-- plus root folder -->
+      <resource>
+        <directory>.</directory>
+        <includes>
+          <include>plugin.xml</include>
+          <include>META-INF/*</include>
+        </includes>
+      </resource>
+    </resources>  
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>${felix.bundle.version}</version>
+        <configuration>
+		   <manifestLocation>META-INF</manifestLocation>
+           <instructions>
+               <Export-Package>com.xiu.open.platform.api*</Export-Package>
+               <Import-Package> 
+               org.osgi.framework;version="${osgi.framework.version}",
+                com.xiu.open.platform.domain;version="${project.version}"
+               </Import-Package>
+               <Bundle-SymbolicName>com.xiu.open.platform.api</Bundle-SymbolicName>
+               <!-- 
+             
+               
+                  add ,plugin.xml if it's present i.e.
+                  src/main/resources,plugin.xml
+               -->
+               <Include-Resource>src/main/resources</Include-Resource>
+               <Bundle-ClassPath>
+					.,
+					{maven-dependencies},
+					WEB-INF/classes
+				</Bundle-ClassPath>
+           </instructions>
+        </configuration>
+      </plugin>
+      
+      <!-- generate manifest automatically once the classes are processed -->
+	  <plugin>   
+		<groupId>org.apache.felix</groupId>
+		<artifactId>maven-bundle-plugin</artifactId>
+		<version>${felix.bundle.version}</version>
+		
+	   </plugin> 
+	   <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+				<includes>
+					<include>**/**/AllTests.java</include>
+				</includes>
+			</configuration>
+		</plugin>     
+    </plugins>
+  </build>
+  
+ 
+  
+</project>

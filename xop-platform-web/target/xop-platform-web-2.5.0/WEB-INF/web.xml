@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+	
+	<display-name>xiu open platform</display-name>
+	 
+	<description>xop platform - open api</description>
+
+ 	<context-param>
+        <param-name>defaultHtmlEscape</param-name>
+        <param-value>true</param-value>
+    </context-param>
+	<!-- Configures Spring XML configuration file locations -->
+	
+	 <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:META-INF/spring/bundle-*.xml</param-value>
+    </context-param>
+	
+	<filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+	
+	
+	<!-- Configures OSGi-aware web application context -->
+<!-- 	<context-param> -->
+<!-- 		<param-name>contextClass</param-name> -->
+<!-- 		<param-value>org.springframework.osgi.web.context.support.OsgiBundleXmlWebApplicationContext</param-value> -->
+<!-- 	</context-param> -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.eclipse.virgo.web.dm.ServerOsgiBundleXmlWebApplicationContext</param-value>
+	</context-param>
+	<!-- web listener -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>xop</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/springmvc-servlet.xml</param-value>
+<!--             <param-value>/WEB-INF/spring/webmvc-config.xml</param-value> -->
+        </init-param>
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.eclipse.virgo.web.dm.ServerOsgiBundleXmlWebApplicationContext</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>xop</servlet-name>
+		<url-pattern>/</url-pattern>
+    </servlet-mapping>
+    
+     <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    
+    
+    
+</web-app>

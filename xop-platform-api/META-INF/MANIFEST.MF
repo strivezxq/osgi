@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1330420267995
+Build-Jdk: 1.6.0_29
+Built-By: zhouxq
+Bundle-ClassPath: .,WEB-INF/classes
+Bundle-ManifestVersion: 2
+Bundle-Name: xop-platform-api
+Bundle-SymbolicName: com.xiu.open.platform.api
+Bundle-Version: 2.5.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.xiu.open.platform.api.service;uses:="com.xiu.open.pl
+ atform.domain";version="2.5.0",com.xiu.open.platform.api.manager;versio
+ n="2.5.0",com.xiu.open.platform.api.third;version="2.5.0"
+Import-Package: com.xiu.open.platform.domain;version="2.5.0",org.osgi.fr
+ amework;version="1.4.0"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0

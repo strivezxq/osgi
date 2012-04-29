@@ -1,0 +1,8 @@
+!SESSION 2011-12-25 18:21:45.691 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_29
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+
+!ENTRY org.eclipse.osgi 4 0 2011-12-25 18:21:45.967
+!MESSAGE The -clean (osgi.clean) option was not successful. Unable to clean the storage area: F:\workspace\osgi\xop-platform\xop-platform-dao\eclipse_config\org.eclipse.osgi

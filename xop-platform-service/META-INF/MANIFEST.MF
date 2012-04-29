@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1330420270077
+Build-Jdk: 1.6.0_29
+Built-By: zhouxq
+Bundle-ManifestVersion: 2
+Bundle-Name: xop-platform-service
+Bundle-SymbolicName: com.xiu.open.platform.service
+Bundle-Version: 2.5.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.xiu.open.platform.service;uses:="com.xiu.open.platfo
+ rm.api.service,org.springframework.stereotype,org.springframework.osgi.
+ extensions.annotation,org.springframework.transaction.annotation,com.xi
+ u.open.platform.domain,com.xiu.open.platform.dao";version="2.5.0"
+Import-Package: com.xiu.open.platform.api.service;version="2.5.0",com.xi
+ u.open.platform.common;version="2.5.0",com.xiu.open.platform.dao;versio
+ n="2.5.0",com.xiu.open.platform.domain;version="2.5.0",org.aopalliance.
+ aop;version="1.0",org.aspectj.lang;version="1.6.8",org.osgi.framework;v
+ ersion="1.4.0",org.springframework.aop;version="3.1.0.RELEASE",org.spri
+ ngframework.aop.aspectj.annotation;version="3.1.0.RELEASE",org.springfr
+ amework.aop.framework;version="3.1.0.RELEASE",org.springframework.beans
+ .factory.aspectj;version="3.1.0.RELEASE",org.springframework.jdbc;versi
+ on="3.1.0.RELEASE",org.springframework.jdbc.datasource;version="3.1.0.R
+ ELEASE",org.springframework.osgi.extensions.annotation;version="1.2.1",
+ org.springframework.stereotype;version="3.1.0.RELEASE",org.springframew
+ ork.transaction.annotation;version="3.1.0.RELEASE"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0

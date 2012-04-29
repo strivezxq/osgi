@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+  	<groupId>com.xiu.open.platform</groupId>
+  	<artifactId>xop-platform</artifactId>
+  	<version>2.5.0</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>xop-platform-dao</artifactId>
+  <version>${project.parent.version}</version>
+  <packaging>bundle</packaging>
+  <name>xop-platform-dao</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  <properties>
+  	<mybatis.version>3.0.6</mybatis.version>
+  	<ibatis.version>2.3.4.726</ibatis.version>
+	<mybatis.spring.version>1.0.2</mybatis.spring.version>
+  	<oracle.version>10.2.0</oracle.version>
+  </properties>
+  
+  <dependencies>
+  	 <dependency>
+	   		<groupId>com.xiu.open.platform</groupId>
+	   		 <artifactId>xop-platform-common</artifactId>
+	  		<version>${project.parent.version}</version>
+	   </dependency>
+  	 <dependency>
+      <groupId>com.xiu.open.platform</groupId>
+      <artifactId>xop-platform-domain</artifactId>
+      <version>${project.parent.version}</version>
+    </dependency>
+    
+	<dependency>
+		<groupId>org.apache.ibatis</groupId>
+		<artifactId>com.springsource.com.ibatis</artifactId>
+		<version>${ibatis.version}</version>
+	</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>com.springsource.org.apache.commons.pool</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>com.springsource.org.apache.commons.dbcp</artifactId>
+			<version>1.2.2.osgi</version>
+		</dependency>
+		
+  	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+		<version>${mybatis.spring.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>${mybatis.version}</version>
+	</dependency>
+
+ 	<dependency>
+		<groupId>com.oracle</groupId>
+		<artifactId>ojdbc14</artifactId>
+		<version>${oracle.version}</version>
+	</dependency> 
+	<dependency>
+	    <groupId>com.jolbox</groupId>
+	    <artifactId>com.jolbox.bonecp</artifactId>
+	    <version>${bonecp.version}</version>
+	    <exclusions>
+	    	<exclusion>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+			</exclusion>
+	    </exclusions>
+	</dependency>
+	<dependency>
+	  <groupId>com.google.common</groupId>
+	  <artifactId>guava</artifactId>
+	  <version>0.8</version>
+	</dependency>
+	
+  </dependencies>
+  
+
+  <!-- for packaging as an OSGi bundle, we use the maven-bundle-plugin -->
+  
+  <!-- see http://felix.apache.org/site/maven-bundle-plugin-bnd.html for more info -->
+  <build>
+    <resources>
+      <!-- standard Maven folder -->
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <!-- plus root folder -->
+      <resource>
+        <directory>.</directory>
+        <includes>
+          <include>plugin.xml</include>
+          <include>META-INF/*</include>
+        </includes>
+      </resource>
+    </resources>  
+    
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>${felix.bundle.version}</version>
+        <configuration>
+		   <manifestLocation>META-INF</manifestLocation>
+           <instructions>
+               <Export-Package>!com.xiu.open.platform.dao.impl,com.xiu.open.platform.dao*</Export-Package>
+                <Import-Package> 
+               org.osgi.framework;version="${osgi.framework.version}",
+               javax.sql,
+               javax.naming.spi,
+               javax.naming,
+               org.springframework.dao.support;version="${spring.maven.artifact.version}",
+               org.springframework.beans.factory.config;version="${spring.maven.artifact.version}",
+               org.springframework.beans.factory.aspectj;version="${spring.maven.artifact.version}",
+               org.springframework.jdbc.datasource;version="${spring.maven.artifact.version}",
+               org.springframework.orm.ibatis;version="${spring.maven.artifact.version}",
+               org.springframework.transaction.aspectj;version="${spring.maven.artifact.version}",
+               org.springframework.beans.factory.annotation;version="${spring.maven.artifact.version}",
+               org.springframework.orm.ibatis.support;version="${spring.maven.artifact.version}",
+               org.springframework.beans;version="${spring.maven.artifact.version}",
+				org.springframework.context;version="${spring.maven.artifact.version}",
+				org.springframework.expression;version="${spring.maven.artifact.version}",
+				org.springframework.osgi.extensions.annotation;version="${spring.osgi.version}",
+				org.springframework.stereotype;version="${spring.maven.artifact.version}",
+				org.springframework.aop;version="${spring.maven.artifact.version}",
+				org.springframework.aop.framework;version="${spring.maven.artifact.version}",
+				org.springframework.aop.aspectj.annotation;version="${spring.maven.artifact.version}",
+				  org.springframework.dao;version="${spring.maven.artifact.version}",
+				com.jolbox.bonecp;version="${bonecp.version}",
+				 org.aspectj.lang;version="${aspectj.version}",
+				 org.mybatis.spring.support;version="${mybatis.spring.version}",
+			     org.mybatis.spring;version="${mybatis.spring.version}",
+				 org.apache.ibatis.session;version="${mybatis.version}",
+				 com.ibatis.sqlmap.client;version="${ibatis.version}",
+				 org.osgi.service.cm;version="${eclipse.osgi.verion}";resolution:=optional,
+				  com.xiu.open.platform.common;version="${project.version}",
+				  com.xiu.open.platform.domain;version="${project.version}"
+               </Import-Package>
+               
+               <Bundle-SymbolicName>com.xiu.open.platform.dao</Bundle-SymbolicName>
+               <!-- 
+               ,
+               com.xiu.open.platform.domain;version="${project.parent.version}"
+               
+                  add ,plugin.xml if it's present i.e.
+                  src/main/resources,plugin.xml
+               -->
+               <Include-Resource>src/main/resources</Include-Resource>
+<!--                <Bundle-ClassPath> -->
+<!-- 					., -->
+<!-- 					{maven-dependencies}, -->
+<!-- 					lib/guava-r08.jar -->
+<!-- 				</Bundle-ClassPath> -->
+           </instructions>
+        </configuration>
+      </plugin>
+      
+      <!-- generate manifest automatically once the classes are processed -->
+	  <plugin>   
+		<groupId>org.apache.felix</groupId>
+		<artifactId>maven-bundle-plugin</artifactId>
+		<version>${felix.bundle.version}</version>
+		
+	   </plugin> 
+	   <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+				<includes>
+					<include>**/**/AllTests.java</include>
+				</includes>
+			</configuration>
+		</plugin>     
+    </plugins>
+  </build>
+  
+ 
+  
+</project>

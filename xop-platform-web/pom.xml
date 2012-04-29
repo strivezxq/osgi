@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+  	<groupId>com.xiu.open.platform</groupId>
+  	<artifactId>xop-platform</artifactId>
+  	<version>2.5.0</version>
+  </parent>
+  
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>xop-platform-web</artifactId>
+  <packaging>war</packaging>
+  <name>xop-platform-web</name>
+  <url>http://www.springframework.org/osgi</url>
+  
+  
+  <dependencies>
+   <dependency>
+	   		<groupId>com.xiu.open.platform</groupId>
+	   		 <artifactId>xop-platform-common</artifactId>
+	  		<version>${project.parent.version}</version>
+	  		<scope>provided</scope>
+	   </dependency>
+  	 <dependency>
+	      <groupId>com.xiu.open.platform</groupId>
+	      <artifactId>xop-platform-domain</artifactId>
+	      <version>${project.parent.version}</version>
+	       <scope>provided</scope> 
+    </dependency>
+  	<dependency>
+  		<groupId>com.xiu.open.platform</groupId>
+  		<artifactId>xop-platform-dao</artifactId>
+  		<version>${project.parent.version}</version>
+  		 <scope>provided</scope> 
+  	</dependency>
+  	<dependency>
+  		<groupId>com.xiu.open.platform</groupId>
+  		<artifactId>xop-platform-api</artifactId>
+  		<version>${project.parent.version}</version>
+  		 <scope>provided</scope> 
+  	</dependency>
+  	<dependency>
+  		<groupId>com.xiu.open.platform</groupId>
+  		<artifactId>xop-platform-service</artifactId>
+  		<version>${project.parent.version}</version>
+  		 <scope>provided</scope> 
+  	</dependency>
+  	<dependency>
+  		<groupId>com.xiu.open.platform</groupId>
+  		<artifactId>xop-platform-manager</artifactId>
+  		<version>${project.parent.version}</version>
+  		 <scope>provided</scope> 
+  	</dependency>
+  	
+<!--   	<dependency> -->
+<!-- 	  <groupId>org.eclipse.virgo</groupId> -->
+<!-- 	  <artifactId>org.eclipse.virgo.web.dm</artifactId> -->
+<!-- 	  <version>2.1.1.RELEASE</version> -->
+<!-- 	  <scope>provided</scope> -->
+<!-- 	</dependency> -->
+  
+  </dependencies>
+  
+  <!-- for packaging as an OSGi bundle, we use the maven-bundle-plugin -->
+  
+  <!-- see http://felix.apache.org/site/maven-bundle-plugin-bnd.html for more info -->
+  <build>
+  	<resources>
+	    <resource>
+	        <directory>src/main/resources</directory>
+	        <excludes>
+	            <exclude>META-INF/*</exclude>
+	        </excludes>
+	    </resource>
+	    <resource>
+	        <directory>src/main/java</directory>
+	    </resource>
+	</resources>
+  
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <version>${felix.bundle.version}</version>
+        <configuration>
+           <supportedProjectTypes>
+				<supportedProjectType>war</supportedProjectType>
+			</supportedProjectTypes>
+		   <manifestLocation>META-INF</manifestLocation>
+           <instructions>
+           	   <Webapp-Context>web</Webapp-Context>
+			   <Web-ContextPath>web</Web-ContextPath>
+               <Export-Package>!com.xiu.open.platform.web*</Export-Package>
+               <Import-Package>
+               		com.xiu.open.platform.api.service;version="${project.version}",
+					 com.xiu.open.platform.dao;version="${project.version}",
+					 com.xiu.open.platform.domain;version="${project.version}",
+					 javax.servlet.http;version="2.5.0",
+					 javax.servlet.jsp;version="2.1.0",
+					 javax.servlet.jsp.jstl.core;version="1.1.2",
+					 javax.servlet.jsp.jstl.fmt;version="1.1.2",
+					 javax.servlet.jsp.jstl.tlv;version="1.1.2",
+					 javax.servlet.resources;version="2.0.0",
+					 org.apache.taglibs.standard.resources;version="1.1.2",
+					 org.apache.taglibs.standard.tag.common.core;version="1.1.2",
+					 org.apache.taglibs.standard.tag.rt.core;version="1.1.2",
+					 org.apache.taglibs.standard.tei;version="1.1.2",
+					 org.apache.taglibs.standard.tlv;version="1.1.2",
+					 org.eclipse.virgo.apps.admin.core;version="[2.1.1,2.1.2)",
+					 org.eclipse.virgo.kernel.module;version="[1,3)",
+					 org.eclipse.virgo.kernel.shell.model.helper;version="[1,3)",
+					 org.eclipse.virgo.web.dm;version="[1,3)",
+					 org.osgi.framework;version=0,
+					 org.osgi.service.cm;version=0,
+					 org.springframework.beans;version="${spring.maven.artifact.version}",
+					 org.springframework.beans.factory.aspectj;version="${spring.maven.artifact.version}",
+					 org.springframework.context;version="${spring.maven.artifact.version}",
+					 org.springframework.expression;version="${spring.maven.artifact.version}",
+					 org.springframework.osgi.extensions.annotation;version="${spring.osgi.version}",
+					 org.springframework.osgi.web.context.support;version="${spring.osgi.version}",
+					 org.springframework.stereotype;version="${spring.maven.artifact.version}",
+					 org.springframework.web;version="${spring.maven.artifact.version}",
+					 org.springframework.web.bind.annotation;version="${spring.osgi.version}",
+					 org.springframework.web.context;version="${spring.maven.artifact.version}",
+					 org.springframework.web.filter;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.mvc;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.mvc.annotation;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.theme;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.view;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.handler;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.i18n;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.view.json;version="${spring.maven.artifact.version}",
+					 org.springframework.oxm.castor;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.view.xml;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.view.tiles2;version="${spring.maven.artifact.version}",
+					 org.springframework.http;version="${spring.maven.artifact.version}",
+					 org.springframework.context.config;version="${spring.maven.artifact.version}",
+					 org.springframework.web.servlet.config;version="${spring.maven.artifact.version}",
+					 org.springframework.beans.factory.xml;version="${spring.maven.artifact.version}",
+					 org.springframework.oxm.xstream;version="${spring.maven.artifact.version}",
+					 com.thoughtworks.xstream.io;version="1.3.1",
+					 org.xml.sax
+               </Import-Package>
+<!--                <Import-Library>org.springframework.spring;version="${spring.maven.artifact.version}"</Import-Library>  -->
+               <Bundle-SymbolicName>com.xiu.open.platform.web</Bundle-SymbolicName>
+                   <Require-Bundle>
+               com.xiu.open.platform.common;bundle-version="${project.version}"
+                </Require-Bundle>
+               <!-- 
+                  add ,plugin.xml if it's present i.e.
+                  src/main/resources,plugin.xml
+               -->
+               <Bundle-ClassPath>
+					.,
+					WEB-INF/classes
+				</Bundle-ClassPath>
+				<Include-Resource>src/main/resources,src/main/webapp</Include-Resource>
+           </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<version>2.1.1</version>
+			<configuration>
+				<archive>
+					<manifestFile>
+						META-INF/MANIFEST.MF
+					</manifestFile>
+				</archive>
+			</configuration>
+		</plugin>
+     
+      <!-- generate manifest automatically once the classes are processed -->
+	  <plugin>   
+		<groupId>org.apache.felix</groupId>
+		<artifactId>maven-bundle-plugin</artifactId>
+		<version>${felix.bundle.version}</version>
+		
+	   </plugin> 
+	   <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<configuration>
+				<includes>
+					<include>**/**/AllTests.java</include>
+				</includes>
+			</configuration>
+		</plugin>     
+    </plugins>
+  </build>
+  
+ 
+  
+</project>

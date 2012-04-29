@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- regular spring configuration file defining the beans for this
+       bundle. We've kept the osgi definitions in a separate 
+       configuration file so that this file can easily be used
+       for integration testing outside of an OSGi environment -->
+       
+    <bean class="org.springframework.osgi.extensions.annotation.ServiceReferenceInjectionBeanPostProcessor" />
+	
+	<bean  name="productJob" class="com.xiu.open.platform.quartz.ProductJob"/>
+	
+<!-- 	<bean id="productJobDetail" -->
+<!-- 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject"> -->
+<!-- 			<ref bean="productJob"/> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetMethod"> -->
+<!-- 			<value>test</value> -->
+<!-- 		</property> -->
+<!-- 	</bean>	 -->
+
+  <bean id="productJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass">
+               <value>com.xiu.open.platform.quartz.DetailQuartzJobBean </value>
+        </property>
+        <property name="jobDataAsMap">
+              <map>
+                     <entry key="targetObject"   value="productJob" />
+                     <entry key="targetMethod" value="test" />
+              </map>
+        </property>
+    </bean> 
+	
+	<bean id="productTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="productJobDetail"/>
+		</property>
+		<property name="cronExpression">
+			<value>0 * * * * ?</value>
+		</property>
+	</bean>
+	
+
+	<!--管理触发器的总设置,管理我们的触发器列表,可以在bean的list中放置多个触发器。 -->
+	<bean autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="productTrigger"/>
+			</list>
+		</property>
+		<property name="quartzProperties"  ref="configAdminProperties" />  
+		<property name="dataSource" ref="dataSourceOsgi" />
+		<property name="overwriteExistingJobs" value="true"/>
+    	<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+	</bean> 
+
+</beans>
