@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1330417838150
+Bnd-LastModified: 1330420261986
 Build-Jdk: 1.6.0_29
 Built-By: zhouxq
 Bundle-ManifestVersion: 2
@@ -13,4 +13,5 @@ Export-Package: com.xiu.open.platform.common.factory;uses:="com.caucho.h
  .open.platform.common;version="2.5.0"
 Import-Package: com.caucho.hessian.client;version="3.1.5",org.osgi.frame
  work;version="1.4.0",org.slf4j;version="1.6.1"
+Originally-Created-By: Apache Maven Bundle Plugin
 Tool: Bnd-1.50.0

@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1330417850546
+Bnd-LastModified: 1330420266223
 Build-Jdk: 1.6.0_29
 Built-By: zhouxq
 Bundle-ManifestVersion: 2
@@ -33,4 +33,5 @@ Import-Package: com.ibatis.sqlmap.client;version="2.3.4.726",com.jolbox.
  ersion="3.1.0.RELEASE",org.springframework.osgi.extensions.annotation;v
  ersion="1.2.1",org.springframework.stereotype;version="3.1.0.RELEASE",o
  rg.springframework.transaction.aspectj;version="3.1.0.RELEASE"
+Originally-Created-By: Apache Maven Bundle Plugin
 Tool: Bnd-1.50.0

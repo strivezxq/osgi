@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1330417862733
+Bnd-LastModified: 1330420270077
 Build-Jdk: 1.6.0_29
 Built-By: zhouxq
 Bundle-ManifestVersion: 2
@@ -23,4 +23,5 @@ Import-Package: com.xiu.open.platform.api.service;version="2.5.0",com.xi
  ELEASE",org.springframework.osgi.extensions.annotation;version="1.2.1",
  org.springframework.stereotype;version="3.1.0.RELEASE",org.springframew
  ork.transaction.annotation;version="3.1.0.RELEASE"
+Originally-Created-By: Apache Maven Bundle Plugin
 Tool: Bnd-1.50.0
